@@ -23,4 +23,5 @@ fi
 echo "Starting buildagent..."
 chown -R teamcity:teamcity /opt/buildAgent
 
-wrapdocker gosu teamcity /opt/buildAgent/bin/agent.sh run
+/opt/buildAgent/bin/agent.sh run
+#wrapdocker gosu teamcity /opt/buildAgent/bin/agent.sh run
