@@ -45,8 +45,8 @@ echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
 pip install robotframework robotframework-archivelibrary
 
 # install 3rd party stuff
-wget --quiet http://192.168.1.10/RadisRepo/3rd_party/ipp.tar.gz
-wget --quiet http://192.168.1.10/RadisRepo/3rd_party/mvIMPACT_acquire.tar.gz
+wget -q http://192.168.1.10/RadisRepo/3rd_party/ipp.tar.gz
+wget -q http://192.168.1.10/RadisRepo/3rd_party/mvIMPACT_acquire.tar.gz
 tar xzf ipp.tar.gz -C /opt/ intel/ipp/include intel/ipp/lib 
 tar xzf mvIMPACT_acquire.tar.gz -C /opt/ mvIMPACT_acquire
 rm -f ipp.tar.gz mvIMPACT_acquire.tar.gz
