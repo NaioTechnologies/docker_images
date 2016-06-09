@@ -17,7 +17,7 @@ EOF
 apt-get update && 
 apt-get install -y \
   locales wget git cmake zip strace apt-utils libpugixml-dev libjpeg-dev libtiff5-dev \
-  libopencv-dev libglfw3-dev libglew-dev uuid-dev libusb-1.0-0-dev libblkid-dev libbluetooth-dev libjsoncpp-dev libudev-dev \
+  libopencv-dev libglfw3-dev libglew-dev uuid-dev libusb-1.0-0-dev libblkid-dev libbluetooth-dev libjsoncpp-dev libudev-dev libhidapi-dev \
   python-pip socat can-utils ruby
 
 # install extra packages from testing
