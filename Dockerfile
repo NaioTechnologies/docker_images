@@ -1,10 +1,10 @@
-FROM ubuntu:14.04
+FROM ubuntu:xenial
 
 ENV AGENT_DIR  /opt/buildAgent
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		lxc iptables aufs-tools ca-certificates curl wget unzip git software-properties-common language-pack-en debootstrap qemu\
+		lxc iptables aufs-tools ca-certificates curl wget unzip git software-properties-common language-pack-en debootstrap sudo qemu syslinux extlinux\
 	&& rm -rf /var/lib/apt/lists/*
 
 # Fix locale.
