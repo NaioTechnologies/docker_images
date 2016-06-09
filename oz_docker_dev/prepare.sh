@@ -25,6 +25,13 @@ echo "deb http://ftp.fr.debian.org/debian testing main" > /etc/apt/sources.list.
 apt-get update && 
 apt-get install -y libglm-dev
 
+# install a decent version of cmake over the official one
+wget -q https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
+tar xzf cmake-3.5.2-Linux-x86_64.tar.gz
+cp -rf cmake-3.5.2-Linux-x86_64/* /usr/
+rm -rf cmake-3.5.2-Linux-x86_64
+rm -f cmake-3.5.2-Linux-x86_64.tar.gz
+
 # remove testing from apt sources once it's done
 rm -f /etc/apt/sources.list.d/testing.list
 apt-get update
