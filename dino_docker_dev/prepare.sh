@@ -1,9 +1,9 @@
 #!/bin/bash
 
 cat > /etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu xenial main universe
-deb http://archive.ubuntu.com/ubuntu xenial-updates main universe
-deb http://archive.ubuntu.com/ubuntu xenial-security main
+deb http://ftp.fr.debian.org/debian jessie main
+deb http://ftp.fr.debian.org/debian jessie-updates main
+deb http://security.debian.org jessie/updates main
 EOF
 
 # use internal proxy
@@ -17,8 +17,24 @@ EOF
 apt-get update && 
 apt-get install -y \
   locales wget git cmake zip strace apt-utils libpugixml-dev libjpeg-dev libtiff5-dev \
-  libopencv-dev libglfw3-dev libglew-dev uuid-dev libusb-1.0-0-dev libblkid-dev libbluetooth-dev libjsoncpp-dev libudev-dev libglm-dev \
+  libopencv-dev libglfw3-dev libglew-dev uuid-dev libusb-1.0-0-dev libblkid-dev libbluetooth-dev libjsoncpp-dev libudev-dev \
   python-pip socat can-utils ruby
+
+# install extra packages from testing
+echo "deb http://ftp.fr.debian.org/debian testing main" > /etc/apt/sources.list.d/testing.list
+apt-get update && 
+apt-get install -y libglm-dev
+
+# install a decent version of cmake over the official one
+wget -q https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
+tar xzf cmake-3.5.2-Linux-x86_64.tar.gz
+cp -rf cmake-3.5.2-Linux-x86_64/* /usr/
+rm -rf cmake-3.5.2-Linux-x86_64
+rm -f cmake-3.5.2-Linux-x86_64.tar.gz
+
+# remove testing from apt sources once it's done
+rm -f /etc/apt/sources.list.d/testing.list
+apt-get update
 
 # locale config
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
