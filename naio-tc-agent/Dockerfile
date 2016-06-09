@@ -39,9 +39,6 @@ RUN groupadd docker && adduser --disabled-password --gecos "" teamcity \
 	&& sed -i -e "s/%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/" /etc/sudoers \
 	&& usermod -a -G docker,sudo teamcity
 
-# Install the magic wrapper.
-#ADD wrapdocker /usr/local/bin/wrapdocker
-
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
