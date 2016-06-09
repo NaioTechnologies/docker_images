@@ -1,0 +1,9 @@
+For instance :
+
+docker build -t oz_dev .
+
+
+
+
+
+
