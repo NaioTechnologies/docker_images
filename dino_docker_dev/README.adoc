@@ -1,6 +1,6 @@
 For instance :
 
-docker build -t oz_dev .
+docker build -t dino_docker_dev .
 
 
 
