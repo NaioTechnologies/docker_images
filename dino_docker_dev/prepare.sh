@@ -46,10 +46,21 @@ pip install robotframework robotframework-archivelibrary
 
 # install 3rd party stuff
 wget -q http://192.168.1.10/RadisRepo/3rd_party/ipp.tar.gz
-wget -q http://192.168.1.10/RadisRepo/3rd_party/mvIMPACT_acquire.tar.gz
-tar xzf ipp.tar.gz -C /opt/ intel/ipp/include intel/ipp/lib 
+tar xzf ipp.tar.gz -C /opt/ intel/ipp/include intel/ipp/lib
+echo "/opt/intel/ipp/lib/intel64" > /etc/ld.so.conf.d/ipp.conf
+rm -f ipp.tar.gz
+
+# call mvBluefox installer script
+wget -q http://192.168.1.10/RadisRepo/3rd_party/install_mvBlueFOX.sh
+wget -q http://192.168.1.10/RadisRepo/3rd_party/mvBlueFOX-x86_64_ABI2-2.16.0.tgz
+chmod +x ./install_mvBlueFOX.sh
+./install_mvBlueFOX.sh
+rm -f /mvBlueFOX-x86_64_ABI2-2.16.0.tgz
+rm -f /install_mvBlueFOX.sh
+
+
 tar xzf mvIMPACT_acquire.tar.gz -C /opt/ mvIMPACT_acquire
-rm -f ipp.tar.gz mvIMPACT_acquire.tar.gz
+rm -f mvIMPACT_acquire.tar.gz
 
 # googletest
 git clone https://github.com/google/googletest.git
