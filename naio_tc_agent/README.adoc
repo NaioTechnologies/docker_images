@@ -1,4 +1,4 @@
 
 * To provision an agent on teamcity server :
   
-  docker run -d --privileged=true --restart=always --name=naio-tc-agent0 --link naio-tc-server:naio-tc-server -v /opt/buildAgent0/work:/opt/buildAgent0/work -v /var/run/docker.sock:/var/run/docker.sock -e TEAMCITY_SERVER=http://naio-tc-server:8111 naio-tc-agent:latest
+  docker run -d --privileged=true --restart=always --name=naio-tc-agent0 --link naio-tc-server:naio-tc-server -v /opt/buildAgent0/work:/opt/buildAgent0/work -v /var/run/docker.sock:/var/run/docker.sock -e TEAMCITY_SERVER=http://naio-tc-server:8111 TEAMCITY_AGENT_WORKDIR=../work0 TEAMCITY_AGENT_TEMPDIR=../temp0 naio-tc-agent:latest
