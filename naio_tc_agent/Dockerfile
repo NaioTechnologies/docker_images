@@ -1,21 +1,22 @@
-FROM ubuntu:xenial
+FROM debian:jessie
 
 ENV AGENT_DIR  /opt/buildAgent
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		lxc iptables aufs-tools ca-certificates curl wget unzip git software-properties-common language-pack-en debootstrap sudo qemu syslinux extlinux\
+		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux\
 	&& rm -rf /var/lib/apt/lists/*
 
 # Fix locale.
 ENV LANG en_US.UTF-8
 ENV LC_CTYPE en_US.UTF-8
-RUN locale-gen en_US && update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen && echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
 
 # Install java-8-oracle
 RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections \
 	&& echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections \
-	&& add-apt-repository -y ppa:webupd8team/java \
+	&& echo deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main > /etc/apt/sources.list.d/java-8-debian.list \
+  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 \
 	&& apt-get update \
   	&& apt-get install -y --no-install-recommends \
       oracle-java8-installer ca-certificates-java \
@@ -29,13 +30,10 @@ ENV DOCKER_BUCKET get.docker.com
 ENV DOCKER_VERSION 1.10.1
 ENV DOCKER_SHA256 2287bc5cbcd1cdad77f1c0c70c2b5b15f1d9c010900c3ffab059fb46fe81d141
 RUN set -x \
-  && curl -fSL "https://${DOCKER_BUCKET}/builds/Linux/x86_64/docker-$DOCKER_VERSION.tgz" -o docker.tgz \
-  && echo "${DOCKER_SHA256} *docker.tgz" | sha256sum -c - \
-  && tar -xzvf docker.tgz \
-  && rm docker.tgz \
+  && curl -fsSL https://get.docker.com/ | sh \
   && docker -v
 
-RUN groupadd docker && adduser --disabled-password --gecos "" teamcity \
+RUN adduser --disabled-password --gecos "" teamcity \
 	&& sed -i -e "s/%sudo.*$/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/" /etc/sudoers \
 	&& usermod -a -G docker,sudo teamcity
 
