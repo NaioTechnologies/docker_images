@@ -1,4 +1,12 @@
 #!/bin/bash
+if [ -z "$TEAMCITY_AGENT_WORKDIR" ]; then
+    echo "TEAMCITY_AGENT_WORKDIR variable not set; for instance for agent 0, launch with -e TEAMCITY_AGENT_WORKDIR=../work0"
+    exit 1
+fi
+if [ -z "$TEAMCITY_AGENT_TEMPDIR" ]; then
+    echo "TEAMCITY_AGENT_TEMPDIR variable not set; for instance for agent 0, launch with -e TEAMCITY_AGENT_TEMPDIR=../temp0"
+    exit 1
+fi
 if [ -z "$TEAMCITY_SERVER" ]; then
     echo "TEAMCITY_SERVER variable not set, launch with -e TEAMCITY_SERVER=http://mybuildserver"
     exit 1
@@ -18,6 +26,8 @@ if [ ! -d "$AGENT_DIR/bin" ]; then
     wget $TEAMCITY_SERVER/update/buildAgent.zip && unzip -d $AGENT_DIR buildAgent.zip && rm buildAgent.zip
     chmod +x $AGENT_DIR/bin/agent.sh
     echo "serverUrl=${TEAMCITY_SERVER}" > $AGENT_DIR/conf/buildAgent.properties
+    echo "workDir=${TEAMCITY_AGENT_WORKDIR}" >> $AGENT_DIR/conf/buildAgent.properties
+    echo "tempDir=${TEAMCITY_AGENT_TEMPDIR}" >> $AGENT_DIR/conf/buildAgent.properties
 fi
 
 echo "Starting buildagent..."
