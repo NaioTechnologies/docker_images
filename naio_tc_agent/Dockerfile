@@ -4,7 +4,7 @@ ENV AGENT_DIR  /opt/buildAgent
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux\
+		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Fix locale.
