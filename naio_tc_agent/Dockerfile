@@ -25,6 +25,9 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-s
   	&& ln -s /etc/ssl/certs/java/cacerts /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts \
   	&& update-ca-certificates
 
+RUN echo Europe/Paris > /etc/timezone \
+    && dpkg-reconfigure -f noninteractive tzdata    
+
 # Install docker
 ENV DOCKER_BUCKET get.docker.com
 ENV DOCKER_VERSION 1.10.1
