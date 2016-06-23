@@ -7,7 +7,7 @@ deb http://security.debian.org jessie/updates main
 EOF
 
 # use internal proxy
-APT_PROXY=192.168.1.44
+APT_PROXY=192.168.1.53
 cat > /etc/apt/apt.conf.d/01proxy <<EOF
 Acquire::http::Proxy "http://$APT_PROXY:3142";
 Acquire::https::Proxy "false";
