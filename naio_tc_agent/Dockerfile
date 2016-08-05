@@ -1,10 +1,10 @@
 FROM debian:jessie
 
 ENV AGENT_DIR  /opt/buildAgent
-
+ 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb \
+		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb less nano \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Fix locale.
@@ -30,7 +30,7 @@ RUN echo Europe/Paris > /etc/timezone \
 
 # Install docker
 ENV DOCKER_BUCKET get.docker.com
-ENV DOCKER_VERSION 1.10.1
+ENV DOCKER_VERSION 1.12.0
 ENV DOCKER_SHA256 2287bc5cbcd1cdad77f1c0c70c2b5b15f1d9c010900c3ffab059fb46fe81d141
 RUN set -x \
   && curl -fsSL https://get.docker.com/ | sh \
@@ -45,6 +45,5 @@ ADD docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 VOLUME /var/lib/docker
-VOLUME /opt/buildAgent
 
 EXPOSE 9090
