@@ -42,7 +42,7 @@ locale-gen
 echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' > /etc/default/locale
 
 # install some extra stuff for testing purpose through pip
-pip install robotframework robotframework-archivelibrary
+pip install robotframework robotframework-archivelibrary enum34
 
 # install 3rd party stuff
 wget -q http://192.168.1.10/RadisRepo/3rd_party/ipp.tar.gz
