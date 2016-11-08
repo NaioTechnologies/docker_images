@@ -4,12 +4,13 @@ ENV AGENT_DIR  /opt/buildagent
  
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb less nano \
+		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb less nano build-essential python bc gcc-multilib\
 	&& rm -rf /var/lib/apt/lists/*
 
 
 RUN echo Europe/Paris > /etc/timezone \
-    && dpkg-reconfigure -f noninteractive tzdata    
+    && dpkg-reconfigure -f noninteractive tzdata \
+    && locale-gen en_US.UTF-8
 
 # Install docker
 ENV DOCKER_BUCKET get.docker.com
