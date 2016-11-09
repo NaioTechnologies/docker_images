@@ -14,5 +14,6 @@ sed -i "s#^tempDir=.*\$#tempDir=../temp${TEAMCITY_AGENT_NUMBER}#" /data/teamcity
 sed -i "s#^name=.*\$#name=agent_${TEAMCITY_AGENT_NUMBER}#" /data/teamcity_agent/conf/buildAgent.properties
 sed -i "s#^serverUrl=.*\$#serverUrl=${SERVER_URL}#" /data/teamcity_agent/conf/buildAgent.properties
 
-/run-agent.sh 
+/run-agent.sh >& /var/log/run_agent.log
+
 
