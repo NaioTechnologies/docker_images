@@ -4,7 +4,7 @@ ENV AGENT_DIR  /opt/buildagent
  
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
-		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb less nano build-essential python bc gcc-multilib\
+		lxc iptables aufs-tools ca-certificates locales curl wget unzip git software-properties-common debootstrap sudo qemu syslinux extlinux gdb less nano build-essential python bc gcc-multilib python-matplotlib\
 	&& rm -rf /var/lib/apt/lists/*
 
 
