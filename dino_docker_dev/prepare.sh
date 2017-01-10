@@ -18,7 +18,7 @@ apt-get update &&
 apt-get install -y \
   locales wget git cmake zip strace apt-utils libpugixml-dev libjpeg-dev libtiff5-dev \
   libopencv-dev libglfw3-dev libglew-dev uuid-dev libusb-1.0-0-dev libblkid-dev libbluetooth-dev libjsoncpp-dev libudev-dev libhidapi-dev \
-  python-pip socat can-utils ruby
+  python-pip socat can-utils ruby libncurses5-dev
 
 # install extra packages from testing
 echo "deb http://ftp.fr.debian.org/debian testing main" > /etc/apt/sources.list.d/testing.list
